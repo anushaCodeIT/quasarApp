@@ -93,13 +93,10 @@ export default {
       truncate: true,
     };
   },
-  created() {
-    console.log(this.data);
-  },
+  created() {},
   methods: {
     addToList(data) {
       if (this.products) {
-        console.log(this.products.filter((item) => item.id == data.id)[0]);
         if (this.products.filter((item) => item.id == data.id)[0]) {
           this.$q.notify("Product Updated");
         } else {

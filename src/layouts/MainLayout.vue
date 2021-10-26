@@ -44,6 +44,15 @@
 
             <q-item-section> Products </q-item-section>
           </q-item>
+
+          <q-item to="/shop" exact clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="store" />
+            </q-item-section>
+
+            <q-item-section> Store </q-item-section>
+          </q-item>
+
           <q-item to="/shopping-cart" exact clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="shopping_cart" />

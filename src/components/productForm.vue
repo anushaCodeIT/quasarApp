@@ -75,7 +75,6 @@ export default {
       handler(val) {
         this.productSubmit = val;
         this.expanded = true;
-        console.log(val);
       },
     },
   },
@@ -92,7 +91,6 @@ export default {
       this.productSubmit.id = id;
       this.$emit("productEvent", this.productSubmit);
       this.expanded = false;
-      console.log(this.productSubmit);
       this.clearFrom();
     },
     clearFrom() {
