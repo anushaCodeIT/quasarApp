@@ -25,7 +25,7 @@
                 :product="product"
                 :index="index"
                 @removeFromCartEvent="removeFromCart($event)"
-                @totalAmountEvent="calTotalAmount($event)"
+                @totalAmountEvent="updateItemTotalAmount($event)"
               ></cartItem>
             </q-list>
             <q-card-section v-if="!myCart.length">
@@ -106,22 +106,24 @@ export default defineComponent({
       product["itemCount"] = 1;
       product["itemTotAmount"] = product.price;
       this.myCart.push(product);
-      console.log(this.myCart);
     },
     removeFromCart(index) {
       this.myCart.splice(index, 1);
       this.$q.notify("Item removed from the cart");
       this.calTotalAmount(index);
     },
-    calTotalAmount(item) {
-      let tot = 0;
-
-      for (var i = 0; i < this.myCart.length; i++) {
-        tot = this.totalAmount + this.myCart[i].price;
-        console.log(this.myCart[i].price);
+    updateItemTotalAmount(item) {
+      if (item) {
+        this.myCart[item.index].itemTotAmount = item.itemTot;
       }
-
-      this.totalAmount = tot;
+      this.calTotalAmount();
+    },
+    calTotalAmount() {
+      this.totalAmount = 0;
+      for (var i = 0; i < this.myCart.length; i++) {
+        this.totalAmount = this.totalAmount + this.myCart[i].itemTotAmount;
+        console.log(this.myCart[i].itemTotAmount);
+      }
     },
   },
   created() {

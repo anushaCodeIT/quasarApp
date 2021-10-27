@@ -16,7 +16,7 @@
 
       <q-item-label caption lines="1" style="max-width: 20%">
         <q-input
-          v-model="product.itemCount"
+          v-model="itemQuantity"
           min="1"
           label="Qty"
           type="number"
@@ -33,7 +33,7 @@
     </q-item-section>
     <q-item-section side>
       <div class="text-grey-8 q-gutter-xs vertical-middle">
-        <span class="cursor-pointer">$ {{ itemTotal }}</span>
+        <span class="cursor-pointer">$ {{ itemTotalPrice }}</span>
       </div>
     </q-item-section>
 
@@ -58,15 +58,18 @@ export default {
   data() {
     return {
       truncate: true,
-      itemTotal: 0,
+      itemTotalPrice: 0,
       itemQuantity: 1,
     };
   },
   methods: {
     calItemTotal() {
-      this.itemTotal = this.product.price * this.itemQuantity;
-
-      this.$emit("totalAmountEvent", this.itemTotal);
+      this.itemTotalPrice = this.product.price * this.itemQuantity;
+      let itemTotObj = {
+        itemTot: this.itemTotalPrice,
+        index: this.index,
+      };
+      this.$emit("totalAmountEvent", itemTotObj);
     },
     remove(index) {
       this.$emit("removeFromCartEvent", index);
